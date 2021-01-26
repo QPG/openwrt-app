@@ -8,13 +8,14 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=forked-daapd
-PKG_VERSION:=27.2
+PKG_VERSION:=25.0
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://github.com/ejurgensen/$(PKG_NAME)/releases/download/$(PKG_VERSION)/
-PKG_HASH:=27294a893253d232161f4521fc42147e65324ce5a13fcf550b537100375277bb
+PKG_HASH:=5741a64d8f54e11e89dfa2fbfae693b2837e1e19a0c4980a20f8ff56bce4456e
 
+PKG_BUILD_DEPENDS:=gperf/host
 PKG_FIXUP:=autoreconf
 PKG_USE_MIPS16:=0
 PKG_INSTALL:=1
@@ -34,7 +35,7 @@ URL:=https://github.com/ejurgensen/forked-daapd
 DEPENDS:=+libgpg-error +libgcrypt +libgdbm +zlib +libexpat +libunistring \
 	+libevent2 +libdaemon +libantlr3c +confuse +alsa-lib +libffmpeg-full \
 	+mxml +libavahi-client +sqlite3-cli +libplist +libcurl +libjson-c \
-	+libprotobuf-c +libgnutls +libsodium +libwebsockets $(ICONV_DEPENDS)
+	+libprotobuf-c +libgnutls +libsodium $(ICONV_DEPENDS)
 endef
 
 define Package/forked-daapd/description
@@ -54,11 +55,7 @@ CONFIGURE_ARGS += \
 	--enable-mpd \
 	--enable-chromecast \
 	--enable-verification \
-	--enable-webinterface \
 	--disable-spotify \
-	--with-libplist \
-	--with-libwebsockets \
-	--with-alsa \
 	--without-pulseaudio \
 	--without-libevent_pthreads
 

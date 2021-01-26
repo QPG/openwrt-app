@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2007-2021 OpenWrt.org
+# Copyright (C) 2007-2018 OpenWrt.org
 #
 # This is free software, licensed under the GNU General Public License v2.
 # See /LICENSE for more information.
@@ -9,7 +9,8 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=zoneinfo
-PKG_VERSION:=2021a
+PKG_VERSION:=2018e
+PKG_VERSION_CODE:=2018e
 PKG_RELEASE:=1
 
 #As i couldn't find real license used "Public Domain"
@@ -17,16 +18,16 @@ PKG_RELEASE:=1
 PKG_LICENSE:=Public Domain
 
 PKG_SOURCE:=tzdata$(PKG_VERSION).tar.gz
-PKG_SOURCE_CODE:=tzcode$(PKG_VERSION).tar.gz
+PKG_SOURCE_CODE:=tzcode$(PKG_VERSION_CODE).tar.gz
 PKG_SOURCE_URL:=http://www.iana.org/time-zones/repository/releases
-PKG_HASH:=39e7d2ba08c68cbaefc8de3227aab0dec2521be8042cf56855f7dc3a9fb14e08
+PKG_HASH:=6b288e5926841a4cb490909fe822d85c36ae75538ad69baf20da9628b63b692e
 
 include $(INCLUDE_DIR)/package.mk
 
 define Download/tzcode
    FILE=$(PKG_SOURCE_CODE)
    URL=$(PKG_SOURCE_URL)
-   HASH:=eb46bfa124b5b6bd13d61a609bfde8351bd192894708d33aa06e5c1e255802d0
+   HASH:=ca340cf20e80b699d6e5c49b4ba47361b3aa681f06f38a0c88a8e8308c00ebce
 endef
 
 $(eval $(call Download,tzcode))
@@ -99,24 +100,6 @@ $(call Package/zoneinfo/Default)
   TITLE:=Zone Information (India)
 endef
 
-define Package/zoneinfo-all
-$(call Package/zoneinfo/Default)
-  TITLE:=Zone Information (all zones)
-  DEPENDS:= \
-	+zoneinfo-simple \
-	+zoneinfo-core \
-	+zoneinfo-africa \
-	+zoneinfo-northamerica \
-	+zoneinfo-southamerica \
-	+zoneinfo-poles \
-	+zoneinfo-asia \
-	+zoneinfo-atlantic \
-	+zoneinfo-australia-nz \
-	+zoneinfo-pacific \
-	+zoneinfo-europe \
-	+zoneinfo-india
-endef
-
 define Build/Prepare
 	(cd $(PKG_BUILD_DIR) && tar -xzf $(DL_DIR)/$(PKG_SOURCE_CODE) && tar -xzf $(DL_DIR)/$(PKG_SOURCE))
 endef
@@ -127,7 +110,7 @@ define Build/Compile
 		$(HOST_CONFIGURE_OPTS) \
 		CC="$(HOSTCC)" \
 		LD="\$$$$(CC)" \
-		CPPFLAGS="$(HOST_CPPFLAGS) -DHAVE_SNPRINTF=1 -DZIC_BLOAT_DEFAULT='\"fat\"'" \
+		CPPFLAGS="$(HOST_CPPFLAGS) -DHAVE_SNPRINTF=1" \
 		LDFLAGS="$(HOST_LDFLAGS)" \
 		TOPDIR="$(PKG_INSTALL_DIR)" \
 		TZDIR="$(PKG_INSTALL_DIR)/zoneinfo" \
@@ -154,7 +137,7 @@ define Package/zoneinfo-simple/install
 		America/Chicago     America/New_York    America/Caracas  \
 		America/Sao_Paulo   Europe/London       Europe/Paris     \
 		Africa/Cairo        Europe/Moscow       Asia/Dubai       \
-		Asia/Karachi        Asia/Dhaka          Asia/Bangkok      \
+		Asia/Karachi        Asia/Dhaka          Asia/Bankok      \
 		Asia/Hong_Kong      Asia/Tokyo          Australia/Darwin \
 		Australia/Adelaide  Australia/Brisbane  Australia/Sydney \
 		Australia/Perth     Pacific/Noumea ; do \
@@ -257,4 +240,3 @@ $(eval $(call BuildPackage,zoneinfo-australia-nz))
 $(eval $(call BuildPackage,zoneinfo-pacific))
 $(eval $(call BuildPackage,zoneinfo-europe))
 $(eval $(call BuildPackage,zoneinfo-india))
-$(eval $(call BuildPackage,zoneinfo-all))

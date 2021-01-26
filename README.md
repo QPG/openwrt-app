@@ -28,5 +28,5 @@ svn co https://github.com/godros/openwrt-luciapps/branches/luci18/luci-app-godpr
 ```
 ## 感谢诸位大神的开源和贡献。
 ```bash
- Lean大神，Lienol大神、sirpdboy大神、kenzok8大神、frainzy1477大神、CTCGFW团队、garypang13大神、vernesong大神、rufengsuixing大神、jerrykuku大神、tty228大神、fw876大神、xiaorouji大神、xiaoqingfengATGH大神、lisaac大神、destan19大神、KFERMercer大神等等诸位大神。2
+ Lean大神，Lienol大神、sirpdboy大神、kenzok8大神、frainzy1477大神、CTCGFW团队、garypang13大神、vernesong大神、rufengsuixing大神、jerrykuku大神、tty228大神、fw876大神、xiaorouji大神、xiaoqingfengATGH大神、lisaac大神、destan19大神、KFERMercer大神等等诸位大神。
 ```
