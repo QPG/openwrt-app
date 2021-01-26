@@ -13,7 +13,6 @@ PKG_NAME:=rclone-ng
 PKG_VERSION:=0.5.0
 PKG_RELEASE:=1
 
-
 PKG_LICENSE:=GPLv3
 PKG_MAINTAINER:=ElonH <elonhhuang@gmail.com>
 
