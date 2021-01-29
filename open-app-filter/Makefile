@@ -12,8 +12,8 @@ include $(INCLUDE_DIR)/package.mk
 #include $(INCLUDE_DIR)/kernel.mk
 
 define Package/appfilter
-  SECTION:=net
-  CATEGORY:=Network
+  SECTION:=Derry Apps
+  CATEGORY:=Derry Apps
   DEPENDS:=+libubox-lua
   TITLE:=App filter userspace module
 endef
